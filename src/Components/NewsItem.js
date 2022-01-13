@@ -1,9 +1,11 @@
 import React from "react";
 
+
 const NewsItem = (props) => {
   let { title, description, imageUrl, newsUrl, author, date, source } = props;
 
-  return (
+  return (<>
+    
     <div className="my-3">
       <div className="card">
         <div
@@ -24,7 +26,7 @@ const NewsItem = (props) => {
               : imageUrl
           }
           className="card-img-top"
-          alt="News-Image"
+          alt="News"
         />
 
         <div className="card-body">
@@ -50,6 +52,7 @@ const NewsItem = (props) => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

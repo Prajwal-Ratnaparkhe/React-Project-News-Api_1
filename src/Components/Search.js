@@ -1,7 +1,9 @@
 import React from 'react'
 
 
+
  const Search = (props) => {
+  
 
     /*
 
@@ -26,16 +28,19 @@ import React from 'react'
 */
 
 
+   
+
+
     return (
         <div>
 
             <>
 
 
-                <form className="form-inline">
-                    <input className="control mr-sm-2" style={{ width: '70%', display: 'initial' }} type="search" /* onChange={handelInput} onKeyPress={handelEnterKeyPressed} value={searchText} */  placeholder="Search" aria-label="Search" />
-                    <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                </form>
+               
+                    <input className="control mr-sm-2"  type="search"  /* onChange={(e) => searchItems(e.target.value)} /* onKeyPress={handelEnterKeyPressed} value={searchText} */  placeholder="Search" aria-label="Search" />
+                    
+               
 
 
 

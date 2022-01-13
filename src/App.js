@@ -10,15 +10,29 @@ import Feedback from './Components/Feedback';
 
 
 
+
 const App = () => {
 
   return (
     <div>
+       
+
+
       <Router >
+
+        
 
         <NavBar />
 
+        
+    
+    
+
+        
+        
+
         <Switch>
+          
 
           <Route exact path="/"><News key="general"  pageSize={11} country="in" category="general" /></Route>
           <Route path="/business"> <News key="business "  pageSize={11} country="in" category="business" /> </Route>
@@ -29,14 +43,24 @@ const App = () => {
           <Route path="/technology"> <News key="technology "  pageSize={11} country="in" category="technology" /> </Route>
           <Route  path='/about' component={AboutUs} />  
           <Route  path='/feedback' > <Feedback /> </Route>  
-            
+
+          
+          
         </Switch>
+        
+       
+        
 
       </Router>
+
+     
+
+     
 
       
 
       <Footer />
+      
 
      
 
