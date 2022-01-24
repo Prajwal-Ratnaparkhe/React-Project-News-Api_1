@@ -22,14 +22,9 @@ footer {
   margin-top: 20px;
   position: relative;
   clear: both;
-
 }
 
-li {
-  list-style: none;
-  cursor: pointer;
-  margin: 1rem 0;
-}
+
 
 a {
   color: #5c9dff;

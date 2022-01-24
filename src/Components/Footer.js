@@ -30,7 +30,7 @@ export const Footer = () => {
                   <div className="col-6 col-lg-3">
                     <h2>Support</h2>
                     <ul>
-                      <li>
+                      <li style={{cursor: "pointer",margin:" 1rem 0",listStyle: "none"}}>
                         <a href="/feedback">Feedback</a>
                       </li>
                     </ul>
