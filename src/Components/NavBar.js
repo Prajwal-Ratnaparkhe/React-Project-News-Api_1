@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from "react-router-dom";
-import Search from './Search';
+import DateTi from './DateTi';
+
 
 
 const NavBar = (props) => {
@@ -23,7 +24,7 @@ const NavBar = (props) => {
                             <li className="nav-item"><Link className="nav-link" to="/sports">Sports</Link></li>
                             <li className="nav-item"><Link className="nav-link" to="/technology">Technology</Link></li>
                         </ul>
-                     <Search/>
+                        <div className="hdate">   <DateTi />  </div>
                     </div>
                 </div>
             </nav>

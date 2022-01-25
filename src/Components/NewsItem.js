@@ -32,12 +32,12 @@ const NewsItem = (props) => {
         <div className="card-body">
           <h5 className="card-title"> {title} </h5>
           <p className="card-text">{description}</p>
-          <p className="author">
+          <span className="author">
             <div className="text-muted">
               By {!author ? "Unknown" : author} on{" "}
               {new Date(date).toGMTString()}
             </div>
-          </p>
+          </span>
 
           <div className="btn">
             <a
