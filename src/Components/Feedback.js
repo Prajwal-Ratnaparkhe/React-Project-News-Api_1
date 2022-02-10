@@ -7,7 +7,6 @@ const Feedback = () => {
   const [lastname, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
-
   const [loader, setLoader] = useState(false);
 
   const handleSubmit = (e) => {
@@ -39,54 +38,60 @@ const Feedback = () => {
   };
 
   return (
-    <div className="container">
-      <>
-        <div className="fdbkFrm">
-          <form className="form" onSubmit={handleSubmit}>
-            <h1>Contact Us </h1>
+    <section>
+      <div className="container">
+        <div className="row justify-content-center  ">
+          <div className="col-lg-8">
+            <div className="feedbackcard ">
+              <h1 style={{ textAlign: "center", marginTop: "40px" }}>
+                Contact Us{" "}
+              </h1>
 
-            <label>First Name</label>
-            <input
-              placeholder="Enter Your First Name"
-              value={firstname}
-              onChange={(e) => setFirstName(e.target.value)}
-              required
-            />
+              <form className="form" onSubmit={handleSubmit}>
+                <label>First Name :</label>
+                <input
+                  placeholder="Enter Your First Name"
+                  value={firstname}
+                  onChange={(e) => setFirstName(e.target.value)}
+                  required
+                />
 
-            <label>Last Name</label>
-            <input
-              placeholder="Enter Your Last Name"
-              value={lastname}
-              onChange={(e) => setLastName(e.target.value)}
-              required
-            />
+                <label>Last Name :</label>
+                <input
+                  placeholder="Enter Your Last Name"
+                  value={lastname}
+                  onChange={(e) => setLastName(e.target.value)}
+                  required
+                />
 
-            <label>Email</label>
-            <input
-              placeholder="Enter Your Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
+                <label>Email :</label>
+                <input
+                  placeholder="Enter Your Email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
 
-            <label>Message</label>
-            <textarea
-              placeholder="Enter Your Message"
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
-              required
-            ></textarea>
+                <label>Message :</label>
+                <textarea
+                  placeholder="Enter Your Message"
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                  required
+                ></textarea>
 
-            <button
-              type="submit"
-              style={{ background: loader ? "#ccc" : " rgb(2, 2, 110)" }}
-            >
-              Submit
-            </button>
-          </form>
+                <button
+                  type="submit"
+                  style={{ background: loader ? "#ccc" : " rgb(2, 2, 110)" }}
+                >
+                  Submit
+                </button>
+              </form>
+            </div>
+          </div>
         </div>
-      </>
-    </div>
+      </div>
+    </section>
   );
 };
 
