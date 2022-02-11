@@ -52,7 +52,7 @@ const News = (props) => {
 
   return (
     <>
-    <Search/>
+    {/*<Search/>*/}
       <h1
         className="text-center"
         style={{ margin: "35px 0px", marginTop: "100px" }}
