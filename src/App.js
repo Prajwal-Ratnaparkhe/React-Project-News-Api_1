@@ -5,7 +5,7 @@ import News from './Components/News';
 import { BrowserRouter as Router, Switch, Route, } from "react-router-dom";
 import AboutUs from './Components/AboutUs';
 import { Footer } from './Components/Footer';
-import Feedback from './Components/Feedback';
+import Feedback from './Components/Feedback'; 
 
 
 
