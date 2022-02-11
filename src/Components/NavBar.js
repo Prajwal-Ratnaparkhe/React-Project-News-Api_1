@@ -25,7 +25,7 @@ const NavBar = (props) => {
                             <li className="nav-item"><Link className="nav-link" to="/technology">Technology</Link></li>
                         </ul>
                        <div className="hdate">   <DateTi />  </div> 
-                    
+                     
                     </div>
                 </div>
             </nav>

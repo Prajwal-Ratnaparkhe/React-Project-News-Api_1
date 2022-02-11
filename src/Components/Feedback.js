@@ -9,7 +9,7 @@ const Feedback = () => {
   const [message, setMessage] = useState("");
   const [loader, setLoader] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e) => { 
     e.preventDefault();
     setLoader(true);
 

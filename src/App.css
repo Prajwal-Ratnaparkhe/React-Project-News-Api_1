@@ -283,7 +283,7 @@ textarea:focus {
   div.example {
     font-size: 80px;
   }
-}
+} 
 
 @media screen and (max-width: 600px) {
   div.example {

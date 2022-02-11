@@ -8,6 +8,7 @@
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
     "axios": "^0.25.0",
+    "build-app": "^0.9.6",
     "cdbreact": "^1.2.1",
     "dateformat": "^5.0.2",
     "firebase": "^8.10.0",

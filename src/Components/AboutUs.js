@@ -35,7 +35,7 @@ const AboutUs = () => {
             <span className="badge rounded-pill bg-danger">
               {" "}
               Devloper & Owner{" "}
-            </span>
+            </span >
           </div>
 
           <div class="about-card">

@@ -14,8 +14,8 @@ const App = () => {
 
   return (
     <div>
-       
-      <Router >
+        
+      <Router>
         <NavBar />
         <Switch>
           
@@ -27,7 +27,7 @@ const App = () => {
           <Route path="/sports"> <News key=" sports"  pageSize={11} country="in" category="sports" /> </Route>
           <Route path="/technology"> <News key="technology "  pageSize={11} country="in" category="technology" /> </Route>
           <Route  path='/about' component={AboutUs} />  
-          <Route  path='/feedback' > <Feedback /> </Route>  
+          <Route  path='/feedback' > <Feedback/> </Route>  
         
         </Switch>
 

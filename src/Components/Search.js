@@ -54,10 +54,10 @@ function Search() {
 
         {loading && <Spinner />}
 
-        {totalResults =="0" ? (
+        {totalResults ==="0" ? (
           <p style={{textAlign:"center",marginTop:"20px"}}><b>No data found </b></p>
         ) : (
-
+ 
           <div className="container">
           <div className="row">
             {articles?.map((element) => {

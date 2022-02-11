@@ -7,7 +7,7 @@ const DateTi = () => {
   const [cdate, setDate] = useState(date);
   const UpdateTime = () => {
     time = new Date().toLocaleTimeString();
-    setCtime(time);
+    setCtime(time); 
   };
   const UpdateDate = () => {
     date = new Date().toLocaleDateString("en-GB");
