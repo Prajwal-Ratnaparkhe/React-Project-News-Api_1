@@ -4,6 +4,7 @@ import NewsItem from "./NewsItem";
 import Spinner from "./Spinner";
 import PropTypes from "prop-types";
 import InfiniteScroll from "react-infinite-scroll-component";
+import Search from "./Search";
 
 const News = (props) => {
   const [articles, setArticles] = useState([]);
@@ -37,7 +38,7 @@ const News = (props) => {
   }, []);
 
   const fetchMoreData = async () => {
-    const url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=b283eea9d4b64c239c2d1d23d5ecaef5&page=${page}&pageSize=${props.pageSize}`;
+    const url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=67a1214ec92345a9a704e89cae5a1b1f&page=${page}&pageSize=${props.pageSize}`;
 
     setPage(page + 1);
     setLoading(true);
@@ -51,6 +52,7 @@ const News = (props) => {
 
   return (
     <>
+    <Search/>
       <h1
         className="text-center"
         style={{ margin: "35px 0px", marginTop: "100px" }}
