@@ -5,6 +5,7 @@ import Spinner from "./Spinner";
 
 function Search() {
   const [articles, setArticles] = useState([]);
+  const [totalResults, setTotalResults] = useState(0);
   const [search, setSearch] = useState([]);
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
@@ -22,6 +23,7 @@ function Search() {
     const resJson = await response.json();
     console.log(response);
     setArticles(resJson.articles);
+    setTotalResults(resJson.totalResults);
     setLoading(false);
   };
 
@@ -52,7 +54,11 @@ function Search() {
 
         {loading && <Spinner />}
 
-        <div className="container">
+        {totalResults =="0" ? (
+          <p style={{textAlign:"center",marginTop:"20px"}}><b>No data found </b></p>
+        ) : (
+
+          <div className="container">
           <div className="row">
             {articles?.map((element) => {
               return (
@@ -73,6 +79,10 @@ function Search() {
             })}
           </div>
         </div>
+        
+        )}
+
+       
       </div>
     </>
   );
