@@ -38,7 +38,7 @@ const News = (props) => {
   }, []);
 
   const fetchMoreData = async () => {
-   const url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=5395a7ba886a47cfa2df671648bdc395&page=${page}&pageSize=${props.pageSize}`;
+   const url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=67a1214ec92345a9a704e89cae5a1b1f&page=${page}&pageSize=${props.pageSize}`;
 
   // const url=`https://gnews.io/api/v4/top-headlines?&lang=en&country=${props.country}&token=4d5f3a359c3cd76ddcbc168c020f4296&page=${page}&max=${props.pageSize}`;
     setPage(page + 1);

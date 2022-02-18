@@ -16,7 +16,7 @@ function Search() {
   }, []);
 
   const fetchApi = async () => {
-    const url = `https://newsapi.org/v2/everything?q=${search}&searchIn=title&language=en&sortBy=relevancy&apiKey=5395a7ba886a47cfa2df671648bdc395&page=1&pageSize=8`;
+    const url = `https://newsapi.org/v2/everything?q=${search}&searchIn=title&language=en&sortBy=relevancy&apiKey=67a1214ec92345a9a704e89cae5a1b1f&page=1&pageSize=8`;
     setPage(page + 1);
     setLoading(true);
     const response = await fetch(url);
