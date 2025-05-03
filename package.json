@@ -11,7 +11,6 @@
     "build-app": "^0.9.6",
     "cdbreact": "^1.2.1",
     "dateformat": "^5.0.2",
-    "firebase": "^8.10.0",
     "news-app": "file:",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
