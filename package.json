@@ -11,6 +11,7 @@
     "build-app": "^0.9.6",
     "cdbreact": "^1.2.1",
     "dateformat": "^5.0.2",
+    "firebase": "^11.6.1",
     "news-app": "file:",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -19,16 +20,16 @@
     "react-icons": "^4.3.1",
     "react-infinite-scroll-component": "^6.1.0",
     "react-router-dom": "^5.3.0",
-    "react-scripts": "4.0.3",
+    "react-scripts": "^5.0.1",
     "react-social-icons": "^5.6.1",
-    "web-vitals": "^1.1.2"
+    "web-vitals": "^1.1.2",
+    "webpack": "^5.99.7"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "postinstall": "npm install"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [

@@ -1,93 +1,155 @@
 import React, { useEffect, useState } from "react";
-
 import NewsItem from "./NewsItem";
 import Spinner from "./Spinner";
 import PropTypes from "prop-types";
-import InfiniteScroll from "react-infinite-scroll-component";
 import Search from "./Search";
 
-const News = (props) => { 
+const News = (props) => {
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [page, setPage] = useState(1);
-  const [totalResults, setTotalResults] = useState(0);
+  const [nextPage, setNextPage] = useState(null); // Dynamic pagination token
+  const [hasMore, setHasMore] = useState(true); // Control Load More button
+  const [error, setError] = useState(""); // State to track errors
 
-  const capitalizeFirstLetter = (string) => {
-    return string.charAt(0).toUpperCase() + string.slice(1);
+  const capitalizeFirstLetter = (string) =>
+    string.charAt(0).toUpperCase() + string.slice(1);
+
+  // Helper function to filter duplicates by title
+  const filterUniqueArticles = (articles) => {
+    const seenTitles = new Set();
+    return articles.filter((article) => {
+      if (!article.title || seenTitles.has(article.title)) {
+        return false;
+      }
+      seenTitles.add(article.title);
+      return true;
+    });
   };
-
-  /*
-  const updateNews = async () => {
-    const url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=5395a7ba886a47cfa2df671648bdc395&page=${page}&pageSize=${props.pageSize}`;
-    setLoading(true);
-    let data = await fetch(url);
-
-    let parsedData = await data.json();
-
-    setArticles(parsedData.articles);
-    setTotalResults(parsedData.totalResults);
-    setLoading(false);
-  };
-*/
 
   useEffect(() => {
+    // Reset state when category or country changes
+    setArticles([]);
+    setNextPage(null);
+    setHasMore(true);
+    setError(""); // Clear previous errors
+    fetchInitialData();
     document.title = `${capitalizeFirstLetter(props.category)} - News`;
-    // updateNews();
-    fetchMoreData();
-    setLoading(false);
-  }, []);
-
-  const fetchMoreData = async () => {
-   const url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=67a1214ec92345a9a704e89cae5a1b1f&page=${page}&pageSize=${props.pageSize}`;
-
-  // const url=`https://gnews.io/api/v4/top-headlines?&lang=en&country=${props.country}&token=4d5f3a359c3cd76ddcbc168c020f4296&page=${page}&max=${props.pageSize}`;
-    setPage(page + 1);
+  }, [props.category, props.country]); // run whenever category or country changes
+  
+  // Fetch initial data for the first time
+  const fetchInitialData = async () => {
     setLoading(true);
-    let data = await fetch(url);
+    const url = `https://newsdata.io/api/1/latest?apikey=pub_43280b6ce8d504cff6bd91594528de94afc5&country=${props.country}&category=${props.category}&language=en,hi,mr`;
 
-    let parsedData = await data.json();
-    setArticles(articles.concat(parsedData.articles));
-    setTotalResults(parsedData.totalResults);
+    try {
+      const response = await fetch(url);
+      const parsedData = await response.json();
+
+      if (parsedData.message && parsedData.message.includes("daily limit")) {
+        setError("You have reached the daily API limit. Please try again later.");
+        setLoading(false);
+        return;
+      }
+
+      if (Array.isArray(parsedData.results)) {
+        const uniqueArticles = filterUniqueArticles(parsedData.results);
+        setArticles(uniqueArticles);
+        setNextPage(parsedData.nextPage || null);
+        setHasMore(!!parsedData.nextPage);
+      } else {
+        setHasMore(false);
+        console.warn("No results or invalid format.");
+      }
+    } catch (error) {
+      console.error("Error fetching news:", error);
+      setHasMore(false);
+    }
+
+    setLoading(false);
+  };
+
+  // Handle loading more articles
+  const handleLoadMore = async () => {
+    if (!nextPage) return;
+
+    setLoading(true);
+    const url = `https://newsdata.io/api/1/latest?apikey=pub_43280b6ce8d504cff6bd91594528de94afc5&country=${props.country}&category=${props.category}&page=${nextPage}&language=en,hi,mr`;
+
+    try {
+      const response = await fetch(url);
+      const parsedData = await response.json();
+
+      if (parsedData.message && parsedData.message.includes("daily limit")) {
+        setError("You have reached the daily API limit. Please try again later.");
+        setLoading(false);
+        return;
+      }
+
+      if (Array.isArray(parsedData.results)) {
+        const newArticles = filterUniqueArticles(parsedData.results);
+        setArticles((prev) => {
+          const combined = [...prev, ...newArticles];
+          return filterUniqueArticles(combined); // remove any cross-page duplicates
+        });
+        setNextPage(parsedData.nextPage || null);
+        setHasMore(!!parsedData.nextPage);
+      } else {
+        setHasMore(false);
+        console.warn("No more pages or invalid data.");
+      }
+    } catch (error) {
+      console.error("Error loading more news:", error);
+      setHasMore(false);
+    }
+
     setLoading(false);
   };
 
   return (
     <>
-   <Search/>
-      <h1
-        className="text-center"
-        style={{ margin: "35px 0px", marginTop: "100px" }}
-      >
-        {" "}
-        Top {capitalizeFirstLetter(props.category)} Headlines
-      </h1>
+      <Search />
+      <h1 className="text-center">{capitalizeFirstLetter(props.category)} Headlines</h1>
+
       {loading && <Spinner />}
-      <InfiniteScroll
-        dataLength={articles?.length}
-        next={fetchMoreData}
-        hasMore={articles?.length !== totalResults}
-        loader={<Spinner />}
-      >
-        <div className="container">
-          <div className="row">
-            {articles?.map((element) => {
-              return (
-                <div className="col-md-4" key={element.url}>
-                  <NewsItem
-                    title={element.title ? element.title : ""}
-                    description={element.description ? element.description : ""}
-                    imageUrl={element.urlToImage}
-                    newsUrl={element.url}
-                    author={element.author}
-                    date={element.publishedAt}
-                    source={element.source.name}
-                  />
-                </div>
-              );
-            })}
-          </div>
+
+      {error && (
+        <div className="alert alert-danger text-center">
+          {error}
         </div>
-      </InfiniteScroll>
+      )}
+
+      <div className="container">
+        <div className="row">
+          {articles.map((element, index) => {
+            if (!element || !element.title || !element.link) return null;
+            return (
+              <div className="col-md-4" key={`${element.link}-${index}`}>
+                <NewsItem
+                  title={element.title}
+                  description={element.description || ""}
+                  imageUrl={element.image_url || ""}
+                  newsUrl={element.link}
+                  author={
+                    Array.isArray(element.creator)
+                      ? element.creator[0]
+                      : element.creator || "Unknown"
+                  }
+                  date={element.pubDate || "Unknown"}
+                  source={element.source_name || element.source_id || "Unknown"}
+                />
+              </div>
+            );
+          })}
+        </div>
+
+        {!loading && hasMore && (
+          <div className="text-center my-3">
+            <button className="btn btn-primary" onClick={handleLoadMore}>
+              Load More
+            </button>
+          </div>
+        )}
+      </div>
     </>
   );
 };
